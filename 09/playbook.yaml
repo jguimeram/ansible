@@ -1,6 +1,6 @@
 ---
 - name: Role example
-  hosts: debian1
+  hosts: debian2
   roles:
     - development
 

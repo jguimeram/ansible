@@ -12,3 +12,6 @@
     name: "{{service}}"
     state: started
   when: ansible_facts['distribution'] | lower == 'debian'
+  notify:
+    - copy_sql_script
+    - create_db

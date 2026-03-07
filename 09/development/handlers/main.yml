@@ -1,3 +1,11 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # handlers file for development
+- name: copy_sql_script
+  copy:
+    src: files/create_db.sql
+    dest: /tmp/create_db.sql
+
+- name: create_db
+  shell:
+    cmd: mysql < /tmp/create_db.sql
