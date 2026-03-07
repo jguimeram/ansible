@@ -1,0 +1,10 @@
+---
+- name: Role example
+  hosts: debian1
+  roles:
+    - development
+
+  tasks:
+    - name: Last tasks
+      debug:
+        msg: "Role tasks are executed first"

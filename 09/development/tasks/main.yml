@@ -1,0 +1,14 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for development
+- name: Install Mariadb
+  apt:
+    name: mariadb-server
+    state: present
+  when: ansible_facts['distribution'] | lower == 'debian'
+
+- name: start Mariadb
+  service:
+    name: mariadb
+    state: started
+  when: ansible_facts['distribution'] | lower == 'debian'
