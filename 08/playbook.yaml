@@ -1,0 +1,13 @@
+- name: Test with variables
+  hosts: debian1
+  vars:
+    message: "Hello, World"
+     
+  tasks:
+   - name: see vars
+     debug:
+      msg: "This message is {{message}}"
+    
+
+...
+        

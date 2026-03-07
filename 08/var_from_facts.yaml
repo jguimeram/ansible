@@ -1,0 +1,11 @@
+- name: Vars from FACTS
+  hosts: debian
+
+  tasks:
+    - name: See FACT vars
+      debug:
+        msg: "{{ansible_facts['architecture']}} {{ansible_facts['processor'][2]}}"
+
+    - name: Use FACT dictionaries
+      debug:
+        var: ansible_facts.date_time

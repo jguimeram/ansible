@@ -1,0 +1,14 @@
+---
+- name: Inventory vars
+  hosts: debian1
+
+  tasks:
+    - name: local var
+      vars:
+        v1: "test"
+      debug:
+        msg: "This var is local {{v1}}"
+
+    - name: var from the inventory
+      debug:
+        msg: "This var is local {{v2}}" # Comes from playbook.yaml -> debian1 var: v2
