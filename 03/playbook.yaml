@@ -1,0 +1,9 @@
+---
+- name: Test play
+  hosts: app_servers
+
+  tasks:
+    - name: ping
+      ansible.builtin.ping:
+    - name: Create a file
+      ansible.builtin.shell: touch /tmp/file.txt

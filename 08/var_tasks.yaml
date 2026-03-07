@@ -1,0 +1,15 @@
+---
+- name: Task vars
+  hosts: debian1
+  vars:
+    v1: "global var"
+  tasks:
+    - name: local var
+      vars:
+        v1: "test"
+      debug:
+        msg: "This var is local {{v1}}"
+
+    - name: local var
+      debug:
+        msg: "This var is local {{v1}}"

@@ -1,0 +1,16 @@
+- name: Test with registered variables
+  hosts: debian1
+
+  tasks:
+    - name: Capture date
+      shell:
+        cmd: date
+      register: myDate
+
+    - name: Print myDate
+      debug:
+        var: myDate
+
+    - name: Print myDate
+      debug:
+        msg: "{{myDate.stdout}}"

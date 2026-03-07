@@ -1,0 +1,34 @@
+---
+- name: Test play
+  hosts: app_servers
+
+  tasks:
+    - name: ping
+      ansible.builtin.ping:
+    - name: Create a file
+      ansible.builtin.shell: 
+        touch /tmp/file.txt
+
+- name: Install nginx
+  hosts: debian
+
+  tasks:
+    - name: stop Apache
+      ansible.builtin.service: 
+         name: apache2
+         state: stopped
+
+    - name: Install nginx
+      ansible.builtin.apt:
+         name: nginx
+         state: latest
+         update_cache: true 
+
+    - name: Up nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+    
+
+...
+        

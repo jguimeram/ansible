@@ -1,0 +1,14 @@
+- name: Vars from files
+  hosts: debian1
+  vars_files:
+    - resources/file1.yaml
+    - resources/file2.yaml
+
+  tasks:
+    - name: file1 var
+      debug:
+        msg: "{{f1}}"
+
+    - name: file2 var
+      debug:
+        msg: "{{f2}}"

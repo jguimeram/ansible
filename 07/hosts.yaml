@@ -1,0 +1,26 @@
+all:
+  hosts:
+  children:
+    ubuntu:
+      hosts:
+        ubuntu1:
+          prt: 9000
+          env: dev
+          ansible_user: root
+    debian:
+      hosts:
+        debian1:
+        debian2:
+      vars:
+        ansible_user: root
+    rocky:
+      hosts:
+        rocky1:
+        rocky2:
+    data_servers:
+      hosts:
+        mysql1:
+    app_servers:
+      hosts:
+        tomcat1:
+        tomcat2:

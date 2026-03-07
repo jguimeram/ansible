@@ -1,0 +1,16 @@
+- name: Test with variables
+  hosts: debian1
+  vars:
+    message: "Hello, World"
+    course: "Ansible"
+    env:
+      - dev
+      - test
+      - prod
+    literal: ["john", "smith", "carter"]
+     
+  tasks:
+   - name: see vars
+     debug:
+      msg: "Current state: {{env}} {{env[1]}} {{literal}}"
+   
