@@ -1,24 +1,30 @@
-# Ansible Roles and Variable Precedence
+# Ansible Roles, Variable Precedence, and Handlers
 
-This directory demonstrates how to use **Ansible Roles** and showcases the difference between `defaults` and `vars` within a role, which is a key part of Ansible's variable precedence.
+This directory demonstrates how to use **Ansible Roles**, showcases the difference between `defaults` and `vars` within a role, and introduces **Handlers** for task-triggered actions.
 
 ## Folder Structure
 
 - `ansible.cfg`: Local Ansible configuration.
 - `hosts.yaml`: Inventory file defining the target hosts.
 - `playbook.yaml`: The main playbook that calls the `development` role.
-- `development/`: A role that manages software installation and services on Debian-based systems.
+- `development/`: A role that manages software installation, services, and database initialization on Debian-based systems.
     - `defaults/main.yml`: Contains low-precedence default variables (`software: mariadb-server`).
     - `vars/main.yml`: Contains high-precedence role variables (`software: nginx`).
-    - `tasks/main.yml`: Contains the logic to install the software and start the service.
+    - `tasks/main.yml`: Contains the logic to install software, start services, and notify handlers.
+    - `handlers/main.yml`: Contains tasks that are only executed when notified by a task that has changed.
+    - `files/create_db.sql`: A static SQL file used by the handler to initialize a database.
 
 ## The "development" Role
 
-The role in this example is designed for Debian systems. It performs two main tasks:
-1. Installs a package defined by the `{{ software }}` variable.
-2. Ensures the service defined by the `{{ service }}` variable is started.
+The role in this example is designed for Debian systems. It performs several key operations:
+1. **Installs a package** defined by the `{{ software }}` variable.
+2. **Starts a service** defined by the `{{ service }}` variable.
+3. **Triggers Handlers**: When the service is started (or if its state changes), it triggers the `copy_sql_script` and `create_db` handlers using the `notify` keyword.
 
-Because `vars/main.yml` has a higher precedence than `defaults/main.yml`, the role will install and start **nginx** by default, overriding the **mariadb** values defined in `defaults`.
+### Handlers in this Role
+Handlers are only executed at the end of a play, and only if a task that notifies them reports a "changed" status.
+- `copy_sql_script`: Copies a local SQL script to the target host.
+- `create_db`: Executes the SQL script using the `mysql` command.
 
 ## Ansible Variable Precedence
 

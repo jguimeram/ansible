@@ -4,7 +4,17 @@
   roles:
     - development
 
+  pre_tasks:
+    - name: Update of the system
+      apt:
+        update_cache: true
+
   tasks:
     - name: Last tasks
       debug:
         msg: "Role tasks are executed first"
+
+  post_tasks:
+    - name: Info
+      debug:
+        msg: "Finished"
